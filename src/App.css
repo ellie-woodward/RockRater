@@ -1,0 +1,57 @@
+.App {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: rgb(75, 198, 4);
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 5rem;
+  color: rgb(75, 198, 4);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+}
+/* .or {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 3rem;
+  color: rgb(75, 198, 4);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+} */
+.headers {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:40px; 
+  color:black;
+  margin:10px;
+}
+.subHeaders {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:20px; 
+  color:black;
+  margin:10px;
+}
