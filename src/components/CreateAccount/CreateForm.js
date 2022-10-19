@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Panel, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
-// import styles from '../../App.css';
+import styles from '../../App.css';
 import { Nav, NavItem } from 'react-bootstrap';
 
 
@@ -12,10 +12,9 @@ const divStyle = {
 
 const panelStyle = {
   backgroundColor: 'rgba(255,255,255,0.5)',
-  border: 0,
-  paddingLeft: 20,
-  paddingRight: 20,
   width: 500,
+  alignItems: 'center',
+  marginTop: -100
 };
 
 const buttonStyle = {
@@ -23,75 +22,116 @@ const buttonStyle = {
   marginTop: 2
 };
 
-
 class CreateForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirm: '',
+      movements: '',
+      wall: '',
+      hold: ''
+    };
 
-    handleFormSubmit(e) {
-        e.preventDefault();
-        console.log(e)
-        console.log("FORM SUBMIT!");
-    
-      }
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handlePasswordConfirmChange = this.handlePasswordConfirmChange.bind(this);
+    this.handleMovementsChange = this.handleMovementsChange.bind(this);
+    this.handleWallChange = this.handleWallChange.bind(this);
+    this.handleHoldChange = this.handleHoldChange.bind(this);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleNameChange(event) {
+    this.setState({name: event.target.value});
+  }
+  handleEmailChange(event) {
+    this.setState({email: event.target.value});
+  }
+  handlePasswordChange(event) {
+    this.setState({password: event.target.value});
+  }
+  handlePasswordConfirmChange(event) {
+    this.setState({passwordConfirm: event.target.value});
+  }
+  handleMovementsChange(event) {
+    this.setState({movements: event.target.value});
+  }
+  handleWallChange(event) {
+    this.setState({wall: event.target.value});
+  }
+  handleHoldChange(event) {
+    this.setState({hold: event.target.value});
+  }
+
+  handleSubmit(event) {
+    const { password, passwordConfirm, email, name, movements, wall, hold } = this.state;
+    if (password !== passwordConfirm) {
+      alert("Passwords don't match");
+  } else {
+    // alert(email + " " + password + " " + name + " " + movements + " " + wall + " " + hold);
+  }
+    // event.preventDefault();
+  }
+
   render() {
     return (
-    <div style={divStyle}>
-        <Panel style={panelStyle}>
+    // <div style={panelStyle}>
+      // <panel style={panelStyle}>
+        <div className="form">
+          <form action="/login" onSubmit={this.handleSubmit}>
           <h1 className="title">Rock Rater</h1>
-          <Form horizontal className="CreateForm" id="createForm">
-            <FormGroup controlId="formName">
-              <FormControl type="name" placeholder="Full Name" />
-            </FormGroup>
-            <FormGroup controlId="formEmail">
-              <FormControl type="email" placeholder="Email Address" />
-            </FormGroup>
-            <FormGroup controlId="formPassword">
-              <FormControl type="password" placeholder="Password" />
-            </FormGroup>
-            <FormGroup controlId="formPasswordConfirm">
-              <FormControl type="password" name="confirm" placeholder="Confirm Password" />
-            </FormGroup>
-            <h2 className="headers">Choose your prefered climbing movements:</h2>
-            <p className="subHeaders">Ctrl click to select multiple</p>
-            <FormGroup controlId="climbingMovements">
-                <select formControlName="climbingMovements" multiple="true">
-                    
-                    <option >Dynamic</option>
-                    <option >Flexible</option>
-                    <option >Stemmy/Pressy</option>
-                    <option >Powerful</option>
-                    <option >Don't know</option>
-                </select>
-            </FormGroup>
-            <FormGroup controlId="climbingWall">
-                <select class="custom-select" formControlName="Wall">
-                    <option value=""> Choose your prefered wall type </option>
-                    <option >Slab</option>
-                    <option >Flat</option>
-                    <option >Overhang</option>
-                    <option >Don't know</option>
-                </select>
-            </FormGroup>
-            <FormGroup controlId="climbingWall">
-                <select class="custom-select" formControlName="Wall">
-                    <option value=""> Choose your prefered climbing hold style</option>
-                    <option >Crimp</option>
-                    <option >Sloper</option>
-                    <option >Pinch</option>
-                    <option >Pocket/Mono</option>
-                    <option >Edge</option>
-                    <option >Undercling</option>
-                    <option >Crack</option>
-                    <option >Don't know</option>
-                </select>
-            </FormGroup>
-            <FormGroup style={buttonStyle} controlId="formSubmit" >
-              <Button bsStyle="primary" type="submit" onClick={this.handleFormSubmit}>
-                Create Account
-              </Button>
-            </FormGroup>
-          </Form>
-        </Panel>
-    </div>
+          <div className="subtitle">Let's create your account!</div>
+          
+            <div className="input-container ic1">
+              <input className="input" type="text" value={this.state.email} onChange={this.handleEmailChange} placeholder="Email Address"/>
+            </div>
+            <div className="input-container ic2">
+              <input className="input" type="password"  value={this.state.password} onChange={this.handlePasswordChange} placeholder="Password"/>
+            </div>
+            <div className="input-container ic2">
+              <input className="input" type="password"  value={this.state.passwordConfirm} onChange={this.handlePasswordConfirmChange} placeholder="Confirm Password"/>
+            </div>
+            <div className="input-container ic2">
+            <div className="subtitle">Choose your prefered climbing movements:</div>
+              <select className="input" formControlName="climbingMovements" value={this.state.movements} onChange={this.handleMovementsChange}>
+                  <option >Dynamic</option>
+                  <option >Flexible</option>
+                  <option >Stemmy/Pressy</option>
+                  <option >Powerful</option>
+                  <option >Don't know</option>
+              </select>
+            </div>
+            <div className="input-container ic2">
+            <div className="subtitle">Choose your prefered wall type</div>
+              <select className="input" class="custom-select" formControlName="wall" value={this.state.wall} onChange={this.handleWallChange}>
+                  <option >Slab</option>
+                  <option >Flat</option>
+                  <option >Overhang</option>
+                  <option >Don't know</option>
+              </select>
+            </div>
+            <div className="input-container ic2">
+            <div className="subtitle">Choose your prefered climbing hold style</div>
+              <select className="input" class="custom-select" formControlName="hold" value={this.state.hold} onChange={this.handleHoldChange}>
+                  <option >Crimp</option>
+                  <option >Sloper</option>
+                  <option >Pinch</option>
+                  <option >Pocket/Mono</option>
+                  <option >Edge</option>
+                  <option >Undercling</option>
+                  <option >Crack</option>
+                  <option >Don't know</option>
+              </select>
+            </div>
+            <input className="submit" type="submit" value="Create Account" />
+          </form>
+        </div>
+      // </panel>
+    // {/* </div> */}
     );
   }
 }

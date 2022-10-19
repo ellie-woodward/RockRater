@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Panel, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
-
+import styles from '../../App.css';
 
 const divStyle = {
   display: 'flex',
@@ -23,29 +23,37 @@ const buttonStyle = {
 
 
 class HomeForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      route: ''
+    };
+    this.handleRouteChange = this.handleRouteChange.bind(this);
+  }
 
-    handleFormSubmit(e) {
-        e.preventDefault();
-        console.log(e)
-        console.log("FORM SUBMIT!");
-    
-      }
+  handleRouteChange(event) {
+    this.setState({route: event.target.value});
+  }
+
+  handleSubmit(event) {
+    // event.preventDefault();
+  }
   render() {
     return (
-    <div style={divStyle}>
-        <Panel style={panelStyle}>
-        <h1 className="title">Home</h1>
-          <Form horizontal className="CreateForm" id="routeCode">
-            <FormGroup controlId="formCode">
-              <FormControl type="id" placeholder="Route Code" />
-            </FormGroup>
-            <FormGroup style={buttonStyle} controlId="formSubmit" >
-              <Button bsStyle="primary" type="submit" onClick={this.handleFormSubmit}>
-                Go to Route Page
-              </Button>
-            </FormGroup>
-          </Form>
-        </Panel>
+    <div className="homeform">
+      <h1 className="title">Home</h1>
+      <div className="input-container ic1">
+        <form style={buttonStyle} action="/create" onSubmit={this.handleSubmit}>
+          <div className="input-container ic1">
+            <input className="input" type="text" value={this.state.route} onChange={this.handleRouteChange} placeholder="Route Code"/>
+          </div>
+        </form>
+        <div className="input-container ic2">
+          <form style={buttonStyle} action="/create">
+            <input className="submit"  type="submit" value="Go to Route Page" />
+          </form>
+        </div>
+      </div>
     </div>
     );
   }
