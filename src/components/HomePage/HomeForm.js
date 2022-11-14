@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Panel, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
 import styles from '../../App.css';
+import routeMock from "../../mockData.js"
 
 const divStyle = {
   display: 'flex',
@@ -21,7 +22,6 @@ const buttonStyle = {
   marginTop: 2
 };
 
-
 class HomeForm extends Component {
   constructor(props) {
     super(props);
@@ -36,20 +36,19 @@ class HomeForm extends Component {
   }
 
   handleSubmit(event) {
-    // event.preventDefault();
   }
   render() {
     return (
     <div className="homeform">
       <h1 className="title">Home</h1>
       <div className="input-container ic1">
-        <form style={buttonStyle} action="/create" onSubmit={this.handleSubmit}>
+        <form style={buttonStyle} action="" onSubmit={this.handleSubmit}>
           <div className="input-container ic1">
-            <input className="input" type="text" value={this.state.route} onChange={this.handleRouteChange} placeholder="Route Code"/>
+            <input className="input" type="text" value={this.state.route} onChange={this.handleRouteChange} placeholder="Route Name"/>
           </div>
         </form>
         <div className="input-container ic2">
-          <form style={buttonStyle} action="/create">
+          <form style={buttonStyle} action="/route" method="GET">
             <input className="submit"  type="submit" value="Go to Route Page" />
           </form>
         </div>

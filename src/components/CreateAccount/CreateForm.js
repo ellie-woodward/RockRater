@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Panel, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
-import styles from '../../App.css';
-import { Nav, NavItem } from 'react-bootstrap';
+// import { Panel, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
+// import styles from '../../App.css';
+// import { Nav, NavItem } from 'react-bootstrap';
 
 
 const divStyle = {
@@ -71,10 +71,10 @@ class CreateForm extends Component {
     const { password, passwordConfirm, email, name, movements, wall, hold } = this.state;
     if (password !== passwordConfirm) {
       alert("Passwords don't match");
+      event.preventDefault();
   } else {
     // alert(email + " " + password + " " + name + " " + movements + " " + wall + " " + hold);
   }
-    // event.preventDefault();
   }
 
   render() {
@@ -82,22 +82,24 @@ class CreateForm extends Component {
     // <div style={panelStyle}>
       // <panel style={panelStyle}>
         <div className="form">
-          <form action="/login" onSubmit={this.handleSubmit}>
-          <h1 className="title">Rock Rater</h1>
-          <div className="subtitle">Let's create your account!</div>
-          
+          <form action="/create" method='POST' onSubmit={this.handleSubmit}>
+            <h1 className="title">Rock Rater</h1>
+            <div className="subtitle">Let's create your account!</div>
             <div className="input-container ic1">
-              <input className="input" type="text" value={this.state.email} onChange={this.handleEmailChange} placeholder="Email Address"/>
+              <input className="input" type="text" value={this.state.name} onChange={this.handleNameChange} name="name" placeholder="Name"/>
+            </div>
+            <div className="input-container ic1">
+              <input className="input" type="text" value={this.state.email} onChange={this.handleEmailChange} name="email" placeholder="Email Address"/>
             </div>
             <div className="input-container ic2">
-              <input className="input" type="password"  value={this.state.password} onChange={this.handlePasswordChange} placeholder="Password"/>
+              <input className="input" type="password"  value={this.state.password} onChange={this.handlePasswordChange} name="password" placeholder="Password"/>
             </div>
             <div className="input-container ic2">
               <input className="input" type="password"  value={this.state.passwordConfirm} onChange={this.handlePasswordConfirmChange} placeholder="Confirm Password"/>
             </div>
             <div className="input-container ic2">
             <div className="subtitle">Choose your prefered climbing movements:</div>
-              <select className="input" formControlName="climbingMovements" value={this.state.movements} onChange={this.handleMovementsChange}>
+              <select className="input" formControlName="climbingMovements" name="movements" value={this.state.movements} onChange={this.handleMovementsChange}>
                   <option >Dynamic</option>
                   <option >Flexible</option>
                   <option >Stemmy/Pressy</option>
@@ -107,7 +109,7 @@ class CreateForm extends Component {
             </div>
             <div className="input-container ic2">
             <div className="subtitle">Choose your prefered wall type</div>
-              <select className="input" class="custom-select" formControlName="wall" value={this.state.wall} onChange={this.handleWallChange}>
+              <select className="input" class="custom-select" formControlName="wall" name="wall" value={this.state.wall} onChange={this.handleWallChange}>
                   <option >Slab</option>
                   <option >Flat</option>
                   <option >Overhang</option>
@@ -116,7 +118,7 @@ class CreateForm extends Component {
             </div>
             <div className="input-container ic2">
             <div className="subtitle">Choose your prefered climbing hold style</div>
-              <select className="input" class="custom-select" formControlName="hold" value={this.state.hold} onChange={this.handleHoldChange}>
+              <select className="input" class="custom-select" formControlName="hold" name="hold" value={this.state.hold} onChange={this.handleHoldChange}>
                   <option >Crimp</option>
                   <option >Sloper</option>
                   <option >Pinch</option>
