@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import { Panel, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
-import styles from '../../App.css';
-import routeMock from "../../mockData.js"
+// import { Panel, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
+// import styles from '../../App.css';
+// import routeMock from "../../mockData.js"
 
-const divStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  marginTop: -100
-};
+// const divStyle = {
+//   display: 'flex',
+//   alignItems: 'center',
+//   marginTop: -100
+// };
 
-const panelStyle = {
-  backgroundColor: 'rgba(255,255,255,0.5)',
-  border: 0,
-  paddingLeft: 20,
-  paddingRight: 20,
-  width: 500,
-};
+// const panelStyle = {
+//   backgroundColor: 'rgba(255,255,255,0.5)',
+//   border: 0,
+//   paddingLeft: 20,
+//   paddingRight: 20,
+//   width: 500,
+// };
 
 const buttonStyle = {
   marginBottom: 5,
@@ -42,7 +42,7 @@ class HomeForm extends Component {
     <div className="homeform">
       <h1 className="title">Home</h1>
       <div className="input-container ic1">
-        <form style={buttonStyle} action="" onSubmit={this.handleSubmit}>
+        <form style={buttonStyle}  onSubmit={this.handleSubmit}>
           <div className="input-container ic1">
             <input className="input" type="text" value={this.state.route} onChange={this.handleRouteChange} placeholder="Route Name"/>
           </div>
