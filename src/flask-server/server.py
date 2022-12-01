@@ -50,6 +50,13 @@ def get_users_by_name(name):
     user = Users.query.get(name)
     return user_schema.jsonify(user)
 
+@app.route('/deleteUsers/<name>/', methods = ['DELETE'])
+def delete_user_by_routeName(name):
+    user = Users.query.get(name)
+    db.session.delete(user)
+    db.session.commit()
+    return user_schema.jsonify(user)
+
 @app.route('/addUsers', methods = ['POST'])
 def addUser():
     name = request.json['name']
