@@ -1,5 +1,27 @@
 import React, { Component } from 'react';
 
+const curUsers = [];
+
+function handleUserData(data){
+  for (let i = 0; i <= 100; i++) {
+    if (data[i] != null){
+      curUsers.push(data[i].email);
+    }
+  }
+}
+
+function insertUser(body){
+  console.log("here");
+  console.log(body);
+  return fetch("http://127.0.0.1:4999/addUsers",{
+    'methods': 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+    }).then(resp => resp.json());
+}
+
 class CreateForm extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +34,15 @@ class CreateForm extends Component {
       wall: '',
       hold: ''
     };
+
+    const data =  fetch("http://127.0.0.1:4999/getUsers",{
+      'methods': 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    },[]);
+    const array = data.then(response => response.json());
+    array.then(success => handleUserData(success));
 
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -46,17 +77,33 @@ class CreateForm extends Component {
   }
 
   handleSubmit(event) {
-    const { password, passwordConfirm } = this.state;
+    const { password, passwordConfirm, email, name, movements, hold, wall,  } = this.state;
     if (password !== passwordConfirm) {
       alert("Passwords don't match");
       event.preventDefault();
+    }
+    let status = "sucess"
+    for (let i=0; i < curUsers.length; i++){
+      if(curUsers[i] === email){
+        status = "invalid";
+      }
+    }
+    if (status === "invalid"){
+      alert("A user with that email already exist.");
+      event.preventDefault();
+    }
+    else{
+      const result = insertUser({name, email, password, movements, wall, hold})
+      console.log("here");
+      console.log(result.then(resp => console.log(resp)));
+
     }
   }
 
   render() {
     return (
         <div className="form">
-          <form action="/" method='POST' onSubmit={this.handleSubmit}>
+          <form action="/" onSubmit={this.handleSubmit}>
             <h1 className="title">Rock Rater</h1>
             <div className="subtitle">Let's create your account!</div>
             <div className="input-container ic1">
@@ -73,7 +120,7 @@ class CreateForm extends Component {
             </div>
             <div className="input-container ic2">
             <div className="subtitle">Choose your prefered climbing movements:</div>
-              <select className="input" formControlName="climbingMovements" name="movements" value={this.state.movements} onChange={this.handleMovementsChange} required="required">
+              <select className="input" name="movements" value={this.state.movements} onChange={this.handleMovementsChange} required="required">
                   <option >Dynamic</option>
                   <option >Flexible</option>
                   <option >Stemmy/Pressy</option>
@@ -83,7 +130,7 @@ class CreateForm extends Component {
             </div>
             <div className="input-container ic2">
             <div className="subtitle">Choose your prefered wall type</div>
-              <select className="input" class="custom-select" formControlName="wall" name="wall" value={this.state.wall} onChange={this.handleWallChange} required="required">
+              <select className="input" name="wall" value={this.state.wall} onChange={this.handleWallChange} required="required">
                   <option >Slab</option>
                   <option >Flat</option>
                   <option >Overhang</option>
@@ -92,7 +139,7 @@ class CreateForm extends Component {
             </div>
             <div className="input-container ic2">
             <div className="subtitle">Choose your prefered climbing hold style</div>
-              <select className="input" class="custom-select" formControlName="hold" name="hold" value={this.state.hold} onChange={this.handleHoldChange} required="required">
+              <select className="input" name="hold" value={this.state.hold} onChange={this.handleHoldChange} required="required">
                   <option >Crimp</option>
                   <option >Sloper</option>
                   <option >Pinch</option>

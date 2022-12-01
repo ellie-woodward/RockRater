@@ -26,19 +26,6 @@ class LoginForm extends Component {
       route: "/home"
     };
 
-    // const [email, setEmail] = useState([]);
-    // useEffect (() => {
-    // const data =  fetch("http://127.0.0.1:4999/getUsers",{
-    //     'methods': 'GET',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   })
-    //   .then(resp => resp.json())
-    //   .then(resp => console.log(resp))
-    //   .catch(error => console.log(error))
-    // },[]);
-
     const data =  fetch("http://127.0.0.1:4999/getUsers",{
       'methods': 'GET',
       headers: {

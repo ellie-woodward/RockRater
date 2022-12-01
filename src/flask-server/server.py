@@ -110,7 +110,7 @@ def delete_route_by_routeName(routeName):
     print("im here 2") 
     db.session.commit()
     print("im here 3") 
-    return routes_schema.jsonify(route)
+    return route_schema.jsonify(route)
 
 @app.route('/addRoutes', methods = ['POST'])
 def addRoutes():
@@ -130,9 +130,9 @@ def addRoutes():
 # can add Comments
 # can get Comments
 class Comments(db.Model):
-    routeName = db.Column(db.String(100), primary_key=True)
+    routeName = db.Column(db.String(100))
     userName = db.Column(db.String(100))
-    review = db.Column(db.Text)
+    review = db.Column(db.String(100000), primary_key=True)
 
     def __init__(self, routeName, userName, review):
         self.routeName = routeName
@@ -157,12 +157,13 @@ def get_comments_by_routeName(routeName):
     comments = Comments.query.get(routeName)
     return comment_schema.jsonify(comments)
 
-@app.route('/deleteComments/<routeName>/', methods = ['DELETE'])
-def delete_comments_by_routeName(routeName):
-    comments = Comments.query.get(routeName)
+@app.route('/deleteComments/<comment>/', methods = ['DELETE'])
+def delete_comments_by_routeName(comment):
+    comments = Comments.query.get(comment)
     db.session.delete(comments)
     db.session.commit()
     return comments_schema.jsonify(comments)
+
 
 @app.route('/addComments', methods = ['POST'])
 def addComments():
@@ -173,43 +174,7 @@ def addComments():
     comments = Comments(routeName, userName, review)
     db.session.add(comments)
     db.session.commit()
-    return comments_schema.jsonify(comments)    
-
-# import rds_db as db
-
-# @app.route("/")
-# def index():
-#     print("here")
-#     return "Hello World!"
-
-# @app.route('/create', methods=['POST'])
-# def insertRoute():
-#     print("made it here")
-#     if request.method == 'POST':
-#         name= request.form['name']
-#         email= request.form['email']
-#         password= request.form['password']
-#         movements= request.form['movements']
-#         wall= request.form['wall']
-#         hold= request.form['hold'] 
-#         db.insert_user(name, email, password, movements, wall, hold)
-#         users = db.get_user()
-#         print(users)
-
-# @app.route('/data')
-# def get_time():
-#     return {
-#         'Name':"geek", 
-#         "Age":"22",
-#         "Date":"hey", 
-#         "programming":"python"
-#         }
-
-# @app.get("/route")
-# def getRoute():
-#     print("i'm here")
-#     routes = db.get_route
-#     print(routes)
+    return comment_schema.jsonify(comments)    
 
 if __name__ == "__main__":
     app.run(debug=True)
