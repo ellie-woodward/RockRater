@@ -18,18 +18,18 @@ class LoginForm extends Component {
       route: "/"
     };
 
-    // const [email, setEmail] = useState([]);
-    // useEffect (() => {
-    //   fetch("http://127.0.0.1:4999/getUsers",{
-    //     'methods': 'GET',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   })
-    //   .then(resp => resp.json())
-    //   .then(resp => console.log(resp))
-    //   .catch(error => console.log(error))
-    // },[]);
+    const [email, setEmail] = useState([]);
+    useEffect (() => {
+      fetch("http://127.0.0.1:4999/getUsers",{
+        'methods': 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(resp => resp.json())
+      .then(resp => console.log(resp))
+      .catch(error => console.log(error))
+    },[]);
 
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);

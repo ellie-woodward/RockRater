@@ -34,7 +34,7 @@ class SetterForm extends Component {
       color: ''
     };
 
-    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleRouteNameChange = this.handleRouteNameChange.bind(this);
     this.handleSetterChange = this.handleSetterChange.bind(this);
     this.handleGradeChange = this.handleGradeChange.bind(this);
     this.handleNumberChange = this.handleNumberChange.bind(this);
@@ -42,8 +42,8 @@ class SetterForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleNameChange(event) {
-    this.setState({name: event.target.value});
+  handleRouteNameChange(event) {
+    this.setState({routeName: event.target.value});
   }
 
   handleSetterChange(event) {
@@ -69,6 +69,7 @@ class SetterForm extends Component {
     return (
       <div className="setterform">
         <h1 className="title">Rock Rater</h1>
+        <h1 className="subtitle">To delete a route you need to enter the route name and then select delete route </h1>
         <form style={buttonStyle} action="/" onSubmit={this.handleSubmit}>
         <div className="input-container ic1">
            <input className="input" type="text" value={this.state.routeName} onChange={this.handleRouteNameChange} placeholder="Route Name"/>
@@ -88,6 +89,9 @@ class SetterForm extends Component {
         </form>
         <form action="/setter" >
           <input className="submit" type="submit" value="Create Route"/>
+        </form>
+        <form action="/setter" >
+          <input className="submit" type="submit" value="Delete Route"/>
         </form>
       </div>
     )

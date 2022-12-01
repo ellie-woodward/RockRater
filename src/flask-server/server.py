@@ -157,6 +157,13 @@ def get_comments_by_routeName(routeName):
     comments = Comments.query.get(routeName)
     return comment_schema.jsonify(comments)
 
+@app.route('/deleteComments/<routeName>/', methods = ['DELETE'])
+def delete_comments_by_routeName(routeName):
+    comments = Comments.query.get(routeName)
+    db.session.delete(comments)
+    db.session.commit()
+    return comments_schema.jsonify(comments)
+
 @app.route('/addComments', methods = ['POST'])
 def addComments():
     routeName = request.json['routeName']
