@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect  } from 'react';
+import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route
@@ -36,8 +36,8 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Route path="/login" component={Login} />
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Login} />
+          <Route path="/home" component={Home} />
           <Route path="/create" component={Create}/>
           <Route path="/setter" component={Setter}/>
           <Route path="/route" component={Routes}/>

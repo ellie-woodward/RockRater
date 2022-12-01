@@ -56,7 +56,7 @@ class CreateForm extends Component {
   render() {
     return (
         <div className="form">
-          <form action="/create" method='POST' onSubmit={this.handleSubmit}>
+          <form action="/" method='POST' onSubmit={this.handleSubmit}>
             <h1 className="title">Rock Rater</h1>
             <div className="subtitle">Let's create your account!</div>
             <div className="input-container ic1">

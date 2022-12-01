@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import { Panel, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
-import { Nav, NavItem } from 'react-bootstrap';
-import styles from '../../App.css';
+// import { Panel, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
+// import { Nav, NavItem } from 'react-bootstrap';
+// import styles from '../../App.css';
 
 
-const divStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  marginTop: -100
-};
+// const divStyle = {
+//   display: 'flex',
+//   alignItems: 'center',
+//   marginTop: -100
+// };
 
-const panelStyle = {
-  backgroundColor: 'rgba(255,255,255,0.5)',
-  border: 0,
-  paddingLeft: 20,
-  paddingRight: 20,
-  width: 500,
-};
+// const panelStyle = {
+//   backgroundColor: 'rgba(255,255,255,0.5)',
+//   border: 0,
+//   paddingLeft: 20,
+//   paddingRight: 20,
+//   width: 500,
+// };
 
 const buttonStyle = {
   marginBottom: 5,
